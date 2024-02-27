@@ -1,0 +1,13 @@
+{
+    "database": {
+        "host": "localhost",
+        "user": "postgres",
+        "password": "postgres",
+        "db": "webtech23project",
+        "port": 5414
+    },
+    "auth": {
+        "jwt_key": "secret",
+        "expiration": "16h"
+    }
+}
