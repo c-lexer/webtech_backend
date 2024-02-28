@@ -67,13 +67,12 @@ router.post("/", checkAuth, async (req, res) => {
 
 router.get("/:station_id/parkingplaces", checkAuth, async (req, res) => {
   const station_id = req.params.station_id;
-  const query = `select
-                  pp.*,
-                  bc."name"
-                from
-                  parking_place pp
-                join bike_category bc on
-                  pp.bike_category_id = bc.bike_category_id
+  const query = `
+  select pp.parking_place_id, pp.rental_station_id, pp.bike_category_id, bike_id, rented_by as rented
+          from
+            parking_place pp
+          full join bike b on
+            pp.parking_place_id = b.parking_place_id
                         where
                             rental_station_id = $1`;
   const result = await pool.query(query, [station_id]);

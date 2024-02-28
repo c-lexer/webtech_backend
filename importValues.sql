@@ -1,17 +1,17 @@
 \connect webtech23project
 
 
-INSERT INTO public.users(name, password, type)
+INSERT INTO public.users(name, password, type, email, wallet)
 VALUES
-  ('Frodo', 'Baggins', 'customer')
-, ('Sam', 'Gamgee', 'customer')
-, ('Merry', 'Brandybuck', 'customer')
-, ('Pippin', 'Took', 'customer')
-, ('Gandalf', 'TheGray', 'customer')
-, ('Boromir', 'FavouriteSon', 'customer')
-, ('Aragorn', 'Elessar', 'customer')
-, ('Gimli', 'Gloinsson', 'customer')
-, ('admin', 'admin', 'admin')
+  ('Frodo', 'Baggins', 'customer', 'a@e.a',  15)
+, ('Sam', 'Gamgee', 'customer', 'a@e.a',10)
+, ('Merry', 'Brandybuck', 'customer', 'a@e.a',2)
+, ('Pippin', 'Took', 'customer', 'a@e.a',3)
+, ('Gandalf', 'TheGray', 'customer',  'a@e.a',100)
+, ('Boromir', 'FavouriteSon', 'customer','a@e.a', 0)
+, ('Aragorn', 'Elessar', 'customer', 'a@e.a',50)
+, ('Gimli', 'Gloinsson', 'customer', 'a@e.a',20)
+, ('admin', 'admin', 'admin', 'a@e.a',1000)
 ;
 
 INSERT INTO public.bike_category(name)
@@ -21,17 +21,6 @@ VALUES
 , ('Mountain')
 , ('Cargo')
 , ('Electric')
-;
-INSERT INTO public.wallet(user_id, amount)
-VALUES
-  (1, 100)
-, (2, 100)
-, (3, 100)
-, (4, 100)
-, (5, 100)
-, (6, 100)
-, (7, 100)
-, (8, 100)
 ;
 INSERT INTO public.rental_stations(name, address, locationX, locationY)
 VALUES 
@@ -70,9 +59,9 @@ VALUES
 , ('Urbanizer', 'Just an ordinary bike to get around in the city.', 26, 1)
 , ('Vroom', 'Just an ordinary kids bike.', 12, 2)
 , ('TinyRide', 'Just an ordinary kids bike.', 12, 2)
-, ('Bergsteiger', 'Just an ordinary bike to get around in the mountains.', 29, 1)
+, ('Bergsteiger', 'Just an ordinary bike to get around in the mountains.', 29, 3)
 , ('LoadHauler', 'Just an ordinary cargo bike.', 26, 4)
-, ('Zappy', 'Just an ordinary electric bike.', 26, 3)
+, ('Zappy', 'Just an ordinary electric bike.', 26, 5)
 ;
 
 
@@ -131,7 +120,6 @@ VALUES
 , (7, 4)
 , (7, 8)
 ;
- 
 
 INSERT INTO public.booking(user_id, bike_id, bike_feature_id, bike_category_id, booking_begin, booking_end)
 VALUES

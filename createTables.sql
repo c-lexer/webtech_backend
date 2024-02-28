@@ -9,9 +9,11 @@ ALTER TYPE public.user_type OWNER TO postgres;
 
 CREATE TABLE public.users (
     user_id SERIAL PRIMARY KEY,
-    name character varying(100) NOT NULL,
+    name character varying(100) UNIQUE NOT NULL,
+    email character varying(100) NOT NULL,
     password character varying(200) NOT NULL,
-    type user_type DEFAULT 'customer'
+    type user_type DEFAULT 'customer',
+    wallet float DEFAULT 0
 );
 ALTER TABLE public.users OWNER TO postgres;
 
@@ -75,7 +77,8 @@ ALTER TABLE public.bike_feature_to_model OWNER TO postgres;
 CREATE TABLE public.bike (
     bike_id SERIAL PRIMARY KEY,
     bike_model_id integer REFERENCES public.bike_model (bike_model_id)  ON DELETE CASCADE NOT NULL,
-    parking_place_id integer REFERENCES public.parking_place (parking_place_id)  ON DELETE SET NULL
+    parking_place_id integer REFERENCES public.parking_place (parking_place_id)  ON DELETE SET NULL,
+    rented_by integer REFERENCES public.users (user_id)  ON DELETE SET NULL
 );
 ALTER TABLE public.bike OWNER TO postgres;
 
@@ -99,10 +102,3 @@ CREATE TABLE public.booking (
     booking_end timestamp NOT NULL
 );
 ALTER TABLE public.booking OWNER TO postgres;
-
-CREATE TABLE public.wallet (
-    wallet_id SERIAL PRIMARY KEY,
-    user_id integer REFERENCES public.users(user_id)  ON DELETE CASCADE NOT NULL,
-    amount money NOT NULL DEFAULT 0
-);
-ALTER TABLE public.wallet OWNER TO postgres;

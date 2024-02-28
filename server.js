@@ -16,6 +16,8 @@ const bikecategorysRoutes = require("./bikecategorys");
 app.use("/api/bikecategorys", bikecategorysRoutes);
 const bikesRoutes = require("./bikes");
 app.use("/api/bikes", bikesRoutes);
+const usersRoutes = require("./users");
+app.use("/api/users", usersRoutes);
 
 app.get("/api", (req, res) => {
   res.setHeader("Content-Type", "text/html");

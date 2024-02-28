@@ -83,12 +83,15 @@ router.post("/", checkAuth, async (req, res) => {
   bc.bike_category_id;`;
 
   const capacity_result = await pool.query(get_capacity_query);
-  console.log(capacity_result.rows[0]);
-  if (capacity_result.rows[0].capacity <= capacity_result.rows[0].taken) {
+  if (
+    capacity_result.rowCount === 0 ||
+    capacity_result.rows[0].capacity <= capacity_result.rows[0].taken
+  ) {
     console.log("No capacity");
     res.status(500).json({ error: "No capacity" });
   } else {
     const { bike_model_id } = req.body;
+    console.log(req.body);
     const query = `INSERT INTO public.bike (bike_model_id, parking_place_id) VALUES ($1, (select 
         parking_place_id
       from
@@ -105,6 +108,7 @@ router.post("/", checkAuth, async (req, res) => {
           bike
         where
           parking_place_id = pp.parking_place_id ) limit 1)) RETURNING *;`;
+    console.log(query);
     const result = await pool.query(query, [bike_model_id]);
     if (result.rowCount > 0) {
       res.status(200).json(result.rows[0]);
